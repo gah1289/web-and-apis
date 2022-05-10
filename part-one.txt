@@ -1,0 +1,99 @@
+What is HTTP?
+-HTTP is Hypertext Transfer Protocol, or how browsers and servers communicate. It is the protocol for fetching resources such as HTML documents.
+
+What is a URL?
+-A URL is a uniform resource locator. It turns into:
+    A protocol (http)
+    hostname (site.com)
+    port (80)
+    resource (/home.html)
+    query (?x=1)
+
+What is DNS?
+-DNS is a domain name service that turns a domain name (i.e. google.com) into an IP address.
+
+What is a query string?
+-A query string is a part of a URL that provides "extra information" in terms of search terms, information from forms, etc. 
+
+What are two HTTP verbs and how are they different?
+-POST: used to create new resources. When it is successful, the return HTTP status is 201, returning a location header with a link to the newly-created resource. POSTS requests have side effects, i.e. they change data on the server. 
+-GET: used to read (or retrieve) a representation of a resource. If there is no error, GET returns a representation in XML or JSON and an HTTP response code of 200 (ok). GET requests don't change server data.
+https://www.restapitutorial.com/lessons/httpmethods.html
+
+What is an HTTP request?
+-A request makes a request to a secure web server. This is almost always a GET request and contains the exact URL you want. A request contains a method (GET), HTTP protocol version (1.1), resource URL, and headers.
+
+What is an HTTP response?
+-A response is what the request returns with the exact HTML for the requested page. It includes an HTTP protocol version (1.1), response status code, and its headers include the date/time the server thinks it is, any cookies the server wabts to set, any cachine information, etc. 
+
+What is an HTTP header? Give a couple examples of request and response headers you have seen.
+-HTTP headers let the client and server pass additional information with an HTTP  request or response. It consists of its case-sensitive name followed by a colon, then by its value. 
+-A request header includes the hostname you're asking about, the date your browser thinks it is, language your browser wants the information in, any cookies the server has sent, etc. 
+-A response header includes content type (text/html), date/time the server thinks it is, any cookies the server wants to set, any caching information, etc.
+
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers 
+
+What are the processes that happen when you type “http://somesite.com/some/page.html” into a browser?
+-This scheme (https://) tells the browser to make a connection to the server using Transport Layer Security, or TLS.
+-The path directs the user to the intended webpage
+-The browser looks up the IP address for the domain.
+-The browser initiates the TCP (transmission control protocol) with the server
+-The browser sends the HTTP request to the server
+-The server processes the request and sends back a response (200 means OK, 404 means not found, etc.)
+-The browser renders the content by inspecting the headers.
+
+https://aws.amazon.com/blogs/mobile/what-happens-when-you-type-a-url-into-your-browser/
+
+Part two:
+
+1.Using curl, make a GET request to the icanhazdadjoke.com API to find all jokes involving the word “pirate”
+gah1289@LAPTOP-9OFDHDMD:~$ curl https://icanhazdadjoke.com/search\?term\=pirate
+What did the pirate say on his 80th birthday? Aye Matey!
+Why couldn't the kid see the pirate movie? Because it was rated arrr!
+What does a pirate pay for his corn? A buccaneer!
+Why do pirates not know the alphabet? They always get stuck at "C".
+Why are pirates called pirates? Because they arrr!
+
+2. Use dig to find what the IP address is for icanhazdadjoke.com
+
+gah1289@LAPTOP-9OFDHDMD:~$ dig icanhazdadjoke.com
+
+; <<>> DiG 9.16.1-Ubuntu <<>> icanhazdadjoke.com
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 18997
+;; flags: qr rd ad; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 0
+;; WARNING: recursion requested but not available
+
+;; QUESTION SECTION:
+;icanhazdadjoke.com.            IN      A
+
+;; ANSWER SECTION:
+icanhazdadjoke.com.     0       IN      A       172.67.211.64
+icanhazdadjoke.com.     0       IN      A       104.21.37.176
+
+;; Query time: 10 msec
+;; SERVER: 172.23.64.1#53(172.23.64.1)
+;; WHEN: Tue May 10 16:37:44 EDT 2022
+;; MSG SIZE  rcvd: 86
+
+3. Make a simple web page and serve it using python3 -m http.server. Visit the page in a browser. 
+
+gah1289@LAPTOP-9OFDHDMD:~/springboard_assignments/14-web-and-apis$ ls
+index.html  part-one.txt
+gah1289@LAPTOP-9OFDHDMD:~/springboard_assignments/14-web-and-apis$ python3 -m http.server
+Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
+127.0.0.1 - - [10/May/2022 17:05:43] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [10/May/2022 17:05:53] "GET / HTTP/1.1" 304 -
+
+Part Four:
+
+let newURL = new URL('https://developer.mozilla.org/en-US/docs/Web/API/URL')
+undefined
+console.log(newURL.host)
+VM527:1 developer.mozilla.org
+undefined
+console.log(newURL.href)
+VM725:1 https://developer.mozilla.org/en-US/docs/Web/API/URL
+console.log(newURL.protocol)
+VM876:1 https:
